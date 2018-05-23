@@ -1,6 +1,6 @@
-# Analysis
+# Badges in StackOverflow
 
-```{r label = "global-options", echo=FALSE, highlight=TRUE}
+```{r label = "global-options", echo=FALSE, message=FALSE, highlight=TRUE}
 knitr::opts_chunk$set(
         message = F,
         error = F,
@@ -74,8 +74,6 @@ if (!require("printr"))
 
 ```
 
-
-# Badges in Stack Overflow
 
 ## Categorization of Badges
 
