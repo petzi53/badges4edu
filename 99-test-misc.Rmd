@@ -1,7 +1,7 @@
 # Test miscellanous things
 
 
-```{r label = "global-options", echo=FALSE, highlight=TRUE}
+```{r label = "start-options", echo=FALSE, highlight=TRUE}
 knitr::opts_chunk$set(
         message = F,
         error = F,
