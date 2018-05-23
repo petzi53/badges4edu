@@ -1,0 +1,495 @@
+--- 
+title: "Badges in Education"
+author: "Peter Baumgartner"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Research on using badges in education, taking StackOverflow.com as a prominent example."
+---
+
+# Preface
+
+Still to write
+
+<!--chapter:end:index.Rmd-->
+
+# Introduction {#intro}
+
+Still to write
+
+<!--chapter:end:01-intro.Rmd-->
+
+# Badges in StackOverflow
+
+```{r label = "global-options", echo=FALSE, message=FALSE, highlight=TRUE}
+knitr::opts_chunk$set(
+        message = F,
+        error = F,
+        warning = F,
+        comment = NA,
+        highlight = T,
+        prompt = T
+        )
+
+### some initialization for Stack Overflow
+
+# My personal user number on Stack Overflow: 
+petzi <- 7322615
+
+# Available actions (added "timeline"):
+so_actions <- c("answers", "badges", "comments", "favorites", "mentioned", "network-activity", "posts", "questions", "reputation", "reputation-history", "suggested-edits", "tags", "top-answer-tags", "top-question-tags", "top-tags", "privileges", "notifications", "moderators", "timeline")
+
+# Basic path of this project:
+options(project_path = getwd())
+
+
+### install and load some important packages
+### https://github.com/tidyverse/tidyverse
+if (!require("tidyverse"))
+        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
+        library(tidyverse)}
+
+### above command installed and loaded the core tidyverse packages:
+# ggplot2: data visualisation
+# tibble:  a modern take on data frames
+# tidyr:   data tidying
+# readr:   data import (csv, tsv, fwf)
+# purrr:   functional R programming
+# dplyr:   data (frame) manipulation
+# stringr: string manipulation
+# forcats: working with categorial varialbes
+
+### My personal reminder for other important packages:
+### Working with times:
+# hms, for times.
+# lubridate, for date/times.
+
+### Importing other types of data:
+# feather, for sharing with Python and other languages.
+# haven, for SPSS, SAS and Stata files.
+# httr, for web apis.
+# jsonlite for JSON.
+# readxl, for .xls and .xlsx files.
+# rvest, for web scraping.
+# xml2, for XML.
+
+### Modelling
+# modelr, for modelling within a pipeline
+# broom, for turning models into tidy data
+
+if (!require("lubridate"))
+        {install.packages("lubridate", repos = 'http://cran.wu.ac.at/')
+        library(lubridate)}
+if (!require("stackr"))
+        {install.packages("stackr", repos = 'http://cran.wu.ac.at/')
+        library(stackr)}
+if (!require("jsonlite"))
+        {install.packages("jsonlite", repos = 'http://cran.wu.ac.at/')
+        library(jsonlite)}
+if (!require("dlstats"))
+        {install.packages("dlstats", repos = 'http://cran.wu.ac.at/')
+        library(dlstats)}
+if (!require("printr"))
+        {install.packages("printr", repos = 'http://cran.wu.ac.at/')
+        library(printr)}
+
+```
+
+
+## Categorization of Badges
+
+I need to download all types of badges with their description and for further investigation to categorize them. 
+
+
+### Badges for different activities
+
+The badges are grouped according to the necessary activities to get them. The different types of badges can be seen on [help page for badges](https://stackoverflow.com/help/badges):
+
+1) Question badges
+2) Answer badges
+3) Partication badges
+4) Moderation badges
+5) Other badges
+6) Documentation badges
+
+### Badges from different sources 
+
+Another differentiation is the point of origin the badges come from. Even though all badges are generated automatically by the system, there are two principal sources to get them. There are two different entities responsible for awarding badges. 
+
+1. There are badges you can get by just doing a certain action once or a needed number of times. 
+2. And there are badges you get only after some community action. 
+
+I call the first type `user` and the second type `community` badges.
+
+**Examples for `user` badges:**
+
+Name: "Civic Duty" (Vote 300 times). 
+Name: "Enthusiast" (Visit the site each day for 30 consecutive day)
+
+Some of the `user` badges are only available after some threshold value is reached and a certain privileges is granted. For instance voting up needs 15 and voting down 125 reputation points. 
+
+**Examples for `community` badges:**
+
+Name: "Favorite Question" (Question favored by 25 users)
+Name: "Popular Question" (Question with 1000 views).
+
+There are also badges tied with certain events, like moderator election, working with the beta version, meeting employees at an event etc. Mostly these badges are in my categorization `user` badges, but you cannot get them at any time, even if you would have the required privileges.
+
+The badge system of Stack Overflow is a dynamic system. When the website was launched (Spetember 15, 2008) it did not start with all 91 badges which are listed today (May 21, 2018). Some of the badges were added during the history of the website but other are not awared anymore. Some of those badges which are not functional anymore are retired badges (e.g. "Analytical", for visiting all sections of the FAQ). This means you will still see some veteran users with these badges. Other badges (all three documentation badges for instance) are withdrawn, e.g. they were even deleted from those user accounts they were awarded earlier. I call these two groups of badges `event` and `dead` badges.
+
+To sum up there are 4 point of origins for badges:
+
+1) Badges from user action = `user` badges
+2) Badges from community action = `community` badges
+3) Badges from some action during a specified occurence = `event` badges
+4) Badges where the point of origin is not interesting anymore as they are now non-funtional = `dead` badges  
+
+
+```{r display-badges-table-landscape, echo=FALSE}
+my_packages <- c("dplyr", "knitr", "kableExtra")
+temp <- lapply(my_packages, library, character.only = TRUE, warn.conflicts = FALSE)
+
+source("R/badges-transform.R")
+badges_table <- readRDS(badges, file = "data-processed/badges.rds")
+        
+kable(badges_table, 
+        booktabs = T, 
+        longtable = T,
+        row.names = T,
+        col.names = c("ID", "Name", "Count", "Rank",
+                           "Activity", "Origin", "Description"),
+        caption = "Badges in Stack Overflow") %>%
+        kable_styling(latex_options = 
+                c("striped", "repeat_header", full_width = T)) %>%
+        column_spec(3, width = "2cm") %>%
+        column_spec(8, width = "10cm") %>%
+        landscape()
+```
+
+
+
+### Badges with different degrees of difficulty
+
+Badges are ranked by their difficulty. According to their level of difficulty users are awared with bronze (relatively easy), silver (moderately difficult) or gold (difficult) badges. User can see those groups of badges separated by lines on the [Stack Overflow website](https://stackoverflow.com/help/badges). On this page one can also inspect how many time each badge was awarded.
+
+There is also a special group of badges intimately linked with reputation of the user's expertise. These `Tag Badges` also come with different degrees of difficulty.
+
+I will focus in my research on those badges where users are mainly responsible. Those are the badges where I can show if users are motivated to strive for them. 
+
+
+
+**Visit the site each day for […] consecutive days. (Days are counted in UTC.)**
+
+* 30 (Enthusiast)
+* 100 (Fanatic)
+
+**Ask a well-received question […] and maintain a positive question record**
+
+* on 5 separate days (Curious)
+* on 30 separate days (Inquisitativ)
+* on 100 separate days (Socratic)
+
+**Complete at least […]. This badge is awarded once per review type**
+
+* one review task (Custodian)
+* 250 review tasks (Reviewer)
+* 1000 review tasks (Steward)
+
+**Edit and answer […] (both actions within 12 hours, answer score > 0)**
+
+* 1 question (Explainer)
+* 50 questions (Refiner)
+* 500 questions (Illuminator)
+
+**Edit**
+
+* first post (Editor)
+* 80 posts (Strunk & White)
+* 500 posts (Copy Editor)
+
+**Edit […] that was inactive for 6 months**
+
+* first post (Excavator)
+* 100 posts (Archeologist)
+
+
+The `user` badges are of utmost importance for my research. Most of these badges are granted for quality assurance work on the website and are not linked with reputation points. They are -- from a systemic perspective -- important for the dynamic of the website and maintain respective raise the qualitiy of the platform and their ecological sustainability.
+
+When I can show that people are striving to get `user` badges -- even when they are not linked with reputation points -- than it is evident that badges are some additional (motivational) factors for the community development.
+
+
+
+<!--chapter:end:02-analyse.Rmd-->
+
+# Methods
+
+We describe our methods in this chapter.
+
+<!--chapter:end:03-method.Rmd-->
+
+# Applications
+
+Some _significant_ applications are demonstrated in this chapter.
+
+## Example one
+
+## Example two
+
+<!--chapter:end:04-application.Rmd-->
+
+# Final Words
+
+We have finished a nice book.
+
+<!--chapter:end:05-summary.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:06-references.Rmd-->
+
+# Appendix
+
+## Material from original bookdown files
+
+### Prerequisites
+
+
+This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
+
+The **bookdown** package can be installed from CRAN or Github:
+
+```{r eval=FALSE}
+install.packages("bookdown")
+# or the development version
+# devtools::install_github("rstudio/bookdown")
+```
+
+Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`.
+
+To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.name/tinytex/>.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+### Intro of the minimal book example
+
+You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
+
+Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
+
+```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, type = 'b', pch = 19)
+```
+
+Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
+
+```{r nice-tab, tidy=FALSE}
+knitr::kable(
+  head(iris, 20), caption = 'Here is a nice table!',
+  booktabs = TRUE
+)
+```
+
+You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+
+## My own (miscellanous) tests
+
+```{r label = "start-options", echo=FALSE, highlight=TRUE}
+knitr::opts_chunk$set(
+        message = F,
+        error = F,
+        warning = F,
+        comment = NA,
+        highlight = T,
+        prompt = T
+        )
+
+### install and load some important packages
+### https://github.com/tidyverse/tidyverse
+if (!require("tidyverse"))
+        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
+        library(tidyverse)}
+
+### above command installed and loaded the core tidyverse packages:
+# ggplot2: data visualisation
+# tibble:  a modern take on data frames
+# tidyr:   data tidying
+# readr:   data import (csv, tsv, fwf)
+# purrr:   functional R programming
+# dplyr:   data (frame) manipulation
+# stringr: string manipulation
+# forcats: working with categorial varialbes
+
+### My personal reminder for other important packages:
+### Working with times:
+# hms, for times.
+# lubridate, for date/times.
+
+### Importing other types of data:
+# feather, for sharing with Python and other languages.
+# haven, for SPSS, SAS and Stata files.
+# httr, for web apis.
+# jsonlite for JSON.
+# readxl, for .xls and .xlsx files.
+# rvest, for web scraping.
+# xml2, for XML.
+
+### Modelling
+# modelr, for modelling within a pipeline
+# broom, for turning models into tidy data
+
+if (!require("lubridate"))
+        {install.packages("lubridate", repos = 'http://cran.wu.ac.at/')
+        library(lubridate)}
+if (!require("stackr"))
+        {install.packages("stackr", repos = 'http://cran.wu.ac.at/')
+        library(stackr)}
+if (!require("jsonlite"))
+        {install.packages("jsonlite", repos = 'http://cran.wu.ac.at/')
+        library(jsonlite)}
+if (!require("dlstats"))
+        {install.packages("dlstats", repos = 'http://cran.wu.ac.at/')
+        library(dlstats)}
+
+# source("stackr-api-utilities.R")
+```
+
+### Install stackr with vignettes
+
+Building vignettes takes some time. So if you are in a hurry, than just install stackr. You can still look at the vignettes in R help. The difference is: With `build_vignettes = TRUE` and then `browseVignettes("stackr")` you can look at the vignettes in your default browser. This is slightly more comfortable.
+
+```{r install-stackr, eval=FALSE}
+devtools::install_github("dgrtwo/stackr", build_vignettes = TRUE)
+browseVignettes("stackr")
+```
+
+## Load several packages at once
+
+The following code is part of a debate at SO with different suggestions. It seems to me, that all suggestions (utility packages, code examples) has some disadvantages:
+
+* **lapply:** For me the [best](https://stackoverflow.com/questions/8175912/load-multiple-packages-at-once) approach -- it uses just `lapply`. I have changed `require` to `library` because of the arguments by [Yihui](https://yihui.name/en/2014/07/library-vs-require/). My lines now gives a error message and stops if one of the called packages is not installed.
+* **easypackages:** is not available on CRAN anymore, has very poor downloads.
+* **pacman:** a very sophisticated programm, but -- for me at least -- to complex and therefore to much overhead.
+* **installed.packages:** [ipak.R](https://gist.github.com/stevenworthington/3178163) This loads _and_ installs missing packages. It is quite similar as `lappy`-version, but -- because of the if-condition -- more complex. Additionally it is checking which packages are installed: 
+
+> "This can be slow when thousands of packages are installed, so do not use this to find out if a named package is installed (use system.file or find.package) nor to find out if a package is usable (call require and check the return value) …"
+
+So maybe the best would be to combine the `lapply` with the `installled.packages`
+ version. But insted to use `installled.packages` I should use in the if-statement `require`, check for the return value and -- if necessary -- to install missing packages.
+ 
+```{r load-several-packages-at-once, eval=FALSE}
+x <- c("plyr", "psych", "tm")
+lapply(x, library, character.only = TRUE)
+```
+
+
+### How many downloads of a defined packages?
+
+
+```{r download-stats}
+library(dlstats)
+y <- cran_stats("learnr")
+ggplot(y, aes(start, downloads, group = package, color = package)) +
+        geom_line() + geom_point(aes(shape = package))
+# cranApp()
+```
+
+## Some data to remind
+
+1. How to find answers tagged with `r` and not active since 6 month: [Search](https://stackoverflow.com/search?q=%5Br%5D+lastactive%3A..6m+is%3Aa)
+
+<!-- 2. My personal user number: `r petzi <- 7322615` -->
+
+3. What kind of actions are are allowed with `combine_url`?
+
+I have added `timeline` to the list!
+
+`r actions <- c("answers", "badges", "comments", "favorites", "mentioned", "network-activity", "posts", "questions", "reputation", "reputation-history", "suggested-edits", "tags", "top-answer-tags", "top-question-tags", "top-tags", "privileges", "notifications", "moderators", "timeline")`
+
+
+### Some experiments
+
+```{r some-experiments, echo=FALSE, eval=FALSE}
+
+# knitr::kable(badges, caption = "Type of Badges in Stack Overflow")
+# knitr::kable(by_activity, caption = "Main Types of Badges in Stack Overflow")
+# knitr::kable(by_origin, caption = "User and Community Badges in Stack Overflow")
+
+
+# # user_info <- stack_users(id = user_petzi,
+# #                          special = "badges",
+# #                          pagesize = 100,
+# #                          page = 1,
+# #                          num_pages = 1000
+# # )
+# # user_timeline <- stack_users(id = 7322615,
+# #                          special = "reputation-history”",
+# #                          pagesize = 100,
+# #                          page = 1,
+# #                          num_pages = 1000
+# # )
+# 
+# # user_timeline1 <- combine_url(base = "users",
+# #         id = 7322615,
+# #         special = "timeline")
+
+# x1 <- stack_GET("users/id", id = 7322615)
+# 
+# x2 <- stack_GET("http://api.stackexchange.com/docs/timeline-on-users#ids=7322615&filter=default&site=stackoverflow&run=true"
+#                 )
+
+# privileges <- stack_privileges()
+```
+
+```{r try-out, echo=FALSE, eval=FALSE}
+
+url <- stackr:::combine_url(base = "users", 
+                            id = c(9371451),
+                            special = "timeline",
+                            special_ids = actions)
+df_user <- stackr:::stack_GET(url, num_pages = 15)
+
+
+```
+
+```{r get-badges-for-views-on-consecutive-days, echo=FALSE, eval=FALSE}
+badges_consecutive <- stack_badges(c(71,83), "recipients")
+
+```
+
+
+
+```{r get-user-history, echo=FALSE, eval=FALSE}
+library("jsonlite")
+
+# I need a loop, 
+# whenever json_list[["has_more"]] == TRUE than run annother page
+# this new database rbind with the previous one
+# maybe there is also a direct method after looking at the programm code of stackr
+
+json_file1 <- "https://api.stackexchange.com/2.2/users/7322615;3566854;1556049;2545523/timeline?page=1&pagesize=100&site=stackoverflow&key=mRTYimh499J3lInIGjcxfA(("
+json_list1 <- jsonlite::fromJSON(json_file1, flatten = TRUE)
+df1 <- as.tibble(json_list1[[1]])
+df1 <- df1 %>% mutate(created = with_tz(as.POSIXct(creation_date, origin = "1970-01-01"), "UTC"))
+# df2 <-
+#         data.frame(matrix(unlist(json_list2[[2]]), nrow = 10, byrow = T), stringsAsFactors =
+#         FALSE)
+
+# json_data <- json_data[[1]] <- NULL
+# df <- as.tibble(json_data)
+
+```
+
+
+<!--chapter:end:99-appendix.Rmd-->
+
