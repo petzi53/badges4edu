@@ -50,7 +50,7 @@ You can write citations, too. For example, we are using the **bookdown** package
 
 ## My own (miscellanous) tests
 
-```{r label = "start-options", echo=FALSE, highlight=TRUE}
+```{r label = "start-options", echo=FALSE, highlight=TRUE, cache=TRUE}
 knitr::opts_chunk$set(
         message = F,
         error = F,
@@ -142,7 +142,7 @@ lapply(x, library, character.only = TRUE)
 ### How many downloads of a defined packages?
 
 
-```{r download-stats}
+```{r download-stats, eval=FALSE, cache=TRUE}
 library(dlstats)
 y <- cran_stats("learnr")
 ggplot(y, aes(start, downloads, group = package, color = package)) +
