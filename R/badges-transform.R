@@ -2,9 +2,12 @@
 # Add different categories to badge data
 #
 # There are different step in this script:
-# 1. Reorder and rename columns
+# 1. Factorize and order column "rank"
 # 2. Add types of activity
-# 3. Add types of origin for awared badges
+# 3. Add types of origin for awarded badges
+# 4. Mark same action necessary for badges, but with different degrees of difficulty
+# 5. Reorder columns
+# 6. Clean up manually long text in column "description"
 #
 # INPUT:    data-raw/badges-raw.rds
 # OUTPUT:   data-processed/badges.rds
@@ -16,13 +19,13 @@
 library(tidyverse)
 badges <- tbl_df(readRDS("data-raw/badges-raw.rds"))
 
-######
-# 1. factorize and order column "rank"
+#####################################
+# 1. Factorize and order column "rank"
 
 badges$rank <- as.ordered(factor(badges$rank, levels = c("bronze", "silver", "gold")))
 
 
-######
+#####################################
 # 2. Add types of activity
 
 activity <-      c(1,5,5,4,3,1,3,5,3,5,
@@ -46,7 +49,8 @@ activity_types <- c(
 )
 badges$activity <- factor(badges$activity, levels = c(1:6), labels = activity_types)
 
-# 3. Add types of origin for the awarded badges
+#####################################
+# 3. Add types of origin for awarded badges
 
 origin <- c(
          1,4,2,1,1,1,3,2,3,3,
@@ -69,7 +73,7 @@ based_on <- c(
 )
 badges$origin <- factor(badges$origin, levels = c(1:4), labels = based_on)
 
-
+#####################################
 # 4. Mark same action necessary for badges, but with different degrees of difficulty
 
 alike <- c(
@@ -86,6 +90,8 @@ alike <- c(
 )
 badges <- cbind(badges, alike)
 
+#####################################
+# 5. Reorder columns
 
 badges <- badges[, c(
         "badge_id",
@@ -97,7 +103,8 @@ badges <- badges[, c(
         "alike",
         "description")]
 
-# 5. Clean up manually long text in column "description"
+#####################################
+# 6. Clean up manually long text in column "description"
 
 badges[1,8] <- "First bounty you manually award on another person's question"
 badges[5,8] <- "Complete 'About Me' section of user profile"

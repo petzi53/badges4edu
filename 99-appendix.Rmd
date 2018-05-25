@@ -236,3 +236,17 @@ df1 <- df1 %>% mutate(created = with_tz(as.POSIXct(creation_date, origin = "1970
 
 ```
 
+```{r get-stream-of-events, eval=FALSE}
+library(tidyverse)
+library(lubridate)
+library(jsonlite)
+
+# returns: "Error in open.connection(con, "rb") : HTTP error 400."
+
+json_file1 <- "https://api.stackexchange.com/2.2/events?site=stackoverflow&key=mRTYimh499J3lInIGjcxfA(("
+json_list1 <- jsonlite::fromJSON(json_file1, flatten = TRUE)
+df1 <- as.tibble(json_list1[[1]])
+df1 <- df1 %>% mutate(created = with_tz(as.POSIXct(creation_date, origin = "1970-01-01"), "UTC"))
+```
+
+

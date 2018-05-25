@@ -1,7 +1,7 @@
 ################################################################################
 # Download badges data from Stack Overflow API
 #
-# see for more information: http://api.stackexchange.com/docs
+# see for more information: https://api.stackexchange.com/docs/badges-by-name
 #
 # INPUT:    from Stack Overflow API
 # OUTPUT:   data-raw/badges-raw.rds

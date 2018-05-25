@@ -34,7 +34,7 @@ if (!require("tidyverse"))
 # purrr:   functional R programming
 # dplyr:   data (frame) manipulation
 # stringr: string manipulation
-# forcats: working with categorial varialbes
+# forcats: working with categorial variables
 
 ### My personal reminder for other important packages:
 ### Working with times:
