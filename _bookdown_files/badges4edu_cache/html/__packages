@@ -16,3 +16,5 @@ dlstats
 printr
 knitr
 kableExtra
+anytime
+bindrcpp

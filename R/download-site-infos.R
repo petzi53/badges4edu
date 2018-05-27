@@ -38,24 +38,21 @@
 #     but with different number of columns!
 #     My solution was to use `bind_rows()` from the `dplyr` package.
 #
-# My query gets 173 websites, which is exactly the figure mentioned on stackoverflow!
-#####################################################################################
+# My query gets 172 websites, which is minus one of the figure mentioned on stackoverflow!
+# But I checked it with the list of all sites: https://stackexchange.com/sites#name
+##########################################################################################
 
 library(stackr)
 library(tidyverse)
 # filter = `!9Z(-wtBWT`
 #           excludes: everything, especially `site`
-#           date of download: 25th May, 2018
+#           date of download: 25th May, 2018, 14:25 UCT
 
 
 my_filter <- "!9Z(-wtBWT"
 stack_names <- c(
-    "3dprinting",          "academia",            "ai" )
-
-
-stack_names <- c(
 "3dprinting",          "academia",            "ai",                  "alcohol",
-"android",             "anime",               "apple",               "arduino",
+"android",             "anime",               "apple",
 "arduino",             "askubuntu",           "astronomy",           "augur",
 "aviation",            "bicycles",            "bioinformatics",      "biology",
 "bitcoin",             "blender",             "boardgames",          "bricks",

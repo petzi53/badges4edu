@@ -1,3 +1,10 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
 # Badges in Stack Overflow
 
 ```{r label = "global-options", echo=FALSE, message=FALSE, highlight=TRUE}
@@ -13,66 +20,17 @@ knitr::opts_chunk$set(
 ### some initialization for Stack Overflow
 
 # My personal user number on Stack Overflow: 
-petzi <- 7322615
+petzi <- 7322615 # for test purposes
 
-# Available actions (added "timeline"):
+# Available actions (I added "timeline"):
 so_actions <- c("answers", "badges", "comments", "favorites", "mentioned", "network-activity", "posts", "questions", "reputation", "reputation-history", "suggested-edits", "tags", "top-answer-tags", "top-question-tags", "top-tags", "privileges", "notifications", "moderators", "timeline")
 
 
-
-### install and load some important packages
-### https://github.com/tidyverse/tidyverse
-if (!require("tidyverse"))
-        {install.packages("tidyverse", repos = 'http://cran.wu.ac.at/')
-        library(tidyverse)}
-
-### above command installed and loaded the core tidyverse packages:
-# ggplot2: data visualisation
-# tibble:  a modern take on data frames
-# tidyr:   data tidying
-# readr:   data import (csv, tsv, fwf)
-# purrr:   functional R programming
-# dplyr:   data (frame) manipulation
-# stringr: string manipulation
-# forcats: working with categorial variables
-
-### My personal reminder for other important packages:
-### Working with times:
-# hms, for times.
-# lubridate, for date/times.
-
-### Importing other types of data:
-# feather, for sharing with Python and other languages.
-# haven, for SPSS, SAS and Stata files.
-# httr, for web apis.
-# jsonlite for JSON.
-# readxl, for .xls and .xlsx files.
-# rvest, for web scraping.
-# xml2, for XML.
-
-### Modelling
-# modelr, for modelling within a pipeline
-# broom, for turning models into tidy data
-
-if (!require("lubridate"))
-        {install.packages("lubridate", repos = 'http://cran.wu.ac.at/')
-        library(lubridate)}
-if (!require("stackr"))
-        {install.packages("stackr", repos = 'http://cran.wu.ac.at/')
-        library(stackr)}
-if (!require("jsonlite"))
-        {install.packages("jsonlite", repos = 'http://cran.wu.ac.at/')
-        library(jsonlite)}
-if (!require("dlstats"))
-        {install.packages("dlstats", repos = 'http://cran.wu.ac.at/')
-        library(dlstats)}
-if (!require("printr"))
-        {install.packages("printr", repos = 'http://cran.wu.ac.at/')
-        library(printr)}
-
 ```
 
-## Introduction
+## The Stack Exchange Network
+
+### 172 Websites with Stack Overflow as Showpiece
 
 Why I am using Stack Overflow as my primary example to investigate the usefulness of badges in education? 
 
@@ -80,7 +38,99 @@ Why I am using Stack Overflow as my primary example to investigate the usefulnes
 
 But Stack Overflow is just the [flagship of StackExchange](https://stackexchange.com/sites#traffic), a network of (currently) 173 Q&A websites, following the same principles for community management. With this high number of Q&A websites for different issues and target groups it is allowed to assume that at least some principles of the successful community management of programmer are not only restricted to technical subjects but can be transferred to other areas as well. One can see from the [graphical represenation](https://stackexchange.com/sites?view=grid#) of the Stack Exchange sites that technology, "hard sciences" like mathematics, physics, chemistry dominate the network. But there are also websites on philosophy, language learning and even websites addressing recreational issues like bicycles, chess and beer, wine & spirits. 
 
-> Stack Exchange network consists of 173 Q&A communities including Stack Overflow, the largest, most trusted online community for developers to learn, share their knowledge, and build their careers. (Quote from the website)
+> Stack Exchange network consists of 173 Q&A communities including Stack Overflow, the largest, most trusted online community for developers to learn, share their knowledge, and build their careers. (Quote from the Stack Overflow website) ^[This quote apears in a little window when you are on the [meta site](https://meta.stackexchange.com) and you click in the StackExchange banner left from the search field. But actually in my downloaded data I found just 172 websites. On the about site of [StackExchange](https://stackexchange.com/about) however I have seen outdated information from the year 2015 (Today: 25th May 2018). You can find another summary of the astonishing success story of StackOverflow from a business perspective on the [company page of StackOverflow](https://stackoverflow.com/company). -- It is sometimes difficult for me to find the right place for some information because of the complex clutter of (similar) sites on different levels (site and meta site).]
+
+### "Graduates" Websites and Websites on Trial (Beta)
+
+
+```{r group-by-site-state, echo=FALSE}
+my_packages <- c("tidyverse", "knitr", "kableExtra", "anytime")
+temp <- lapply(my_packages, library, character.only = TRUE)
+
+info_tbl <- readRDS("data-processed/sites.rds")
+
+sites_state <- info_tbl[-c(1, 3:25, 27:33)]
+sites_state <- sites_state[, c(2,1)]
+
+sites_state <- sites_state %>% as_tibble() %>% mutate(
+    site_state = if_else(
+        is.na(info_tbl$site_launch_date), # check if NA
+        info_tbl$site_state <- "Beta", # mark as beta
+        info_tbl$site_state <- "Normal"
+    )
+)
+
+by_state <- sites_state %>% group_by(site_state)
+sites <- by_state %>% summarise(
+    users = sum(total_users),
+    n = n()
+)
+
+knitr::kable(sites, 
+        booktabs = T, 
+        longtable = F,
+        row.names = F,
+        col.names = c("Status", "Users", "Sites"),
+        caption = "StockExchange Websites by their Status") %>%
+        column_spec(1, width = "2cm")  %>%
+        column_spec(2, width = "3cm")  %>%
+        column_spec(3, width = "2cm")
+```
+
+### Stack Exchange Websites by Subject
+
+
+
+```{r display-site-infos, echo=FALSE}
+my_packages <- c("tidyverse", "knitr", "kableExtra", "anytime")
+temp <- lapply(my_packages, library, character.only = TRUE)
+
+info_tbl <- readRDS("data-processed/sites.rds")
+
+sites <- info_tbl[-c(1, 3:22, 24:25, 27:33)]
+sites <- sites[order(sites$total_users, decreasing = TRUE), ]
+sites <- rownames_to_column(sites, var = "#")
+sites$`#` <- as.numeric(sites$`#`)
+
+# add marker if website is still Beta
+sites <- sites %>% as_tibble() %>% mutate(
+    site_state_date = if_else(
+        is.na(info_tbl$site_launch_date), # check if NA
+        paste(as.character(anydate(info_tbl$site_open_beta_date)), "B"), # replace with beta date
+        as.character(anydate(info_tbl$site_launch_date)) # not NA then normal launch date
+    )
+)
+
+sites <- sites[, c("#", 
+                   "site_name", 
+                   "total_users", 
+                   "site_state_date",
+                   "site_site_url")]
+
+sites <- sites[order(sites$site_name), ]
+
+
+
+knitr::kable(sites, 
+        booktabs = T, 
+        longtable = T,
+        row.names = F,
+        col.names = c("#*", "Name", "Users", "Launched†", "URL"),
+        caption = "Full List of Websites of the StockExchange Network (May 25th, 2018") %>%
+        kable_styling(latex_options = 
+                c("striped", "repeat_header", full_width = T))  %>%
+        column_spec(1, width = "0.5cm")  %>%
+        column_spec(2, width = "3.5cm")  %>%
+        footnote(symbol = c(
+            "# = rank acoording to number of users",
+            "B = launch date of open beta, e.g. site is still in beta")
+            )
+
+
+```
+
+
+## Dynamics of the Stack Exchange Community
 
 But before to look into these other websites one should grasp the community dynamics of the most successful member of the network. 
 
@@ -97,7 +147,7 @@ Besides the common review of literature my research in this paper is based on fo
 1. **[Stack Overflow](https://stackoverflow.com/):** Clearly enough this has to be one of my chief source of information.
 2. **[Stack Exchance API](http://api.stackexchange.com/):** The Stack Exchange network provides an Application Programming Interface (API) where one can download data for answering research question. 
 3. **[Meta Stack Overflow](https://meta.stackoverflow.com/):** This website is especially dedicated to Q&A _about_ Stack Overflow itself. The discussion on this website is an important resource on qualitative data to my research question.
-4. **[Meta Stack Exchange](https://meta.stackexchange.com/):** Another for meta-discussion. This time for the whole Stack Exchange family of Q&A websites, so zu speak the meta-meta-website of the Stack Overflow website.
+4. **[Meta Stack Exchange](https://meta.stackexchange.com/):** Another for meta-discussion. This time for the whole Stack Exchange family of Q&A websites, so to speak the meta-meta-website of the Stack Overflow website.
 
 ## Categorization of Badges
 
@@ -205,8 +255,7 @@ When I can show that people are striving to get `user` badges -- even when they 
 my_packages <- c("dplyr", "knitr", "kableExtra")
 temp <- lapply(my_packages, library, character.only = TRUE, warn.conflicts = FALSE)
 
-source("R/badges-transform.R")
-badges_table <- readRDS(badges, file = "data-processed/badges.rds")
+badges_table <- readRDS("data-processed/badges.rds")
         
 kable(badges_table, 
         booktabs = T, 
