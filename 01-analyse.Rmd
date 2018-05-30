@@ -43,13 +43,14 @@ But Stack Overflow is just the [flagship of StackExchange](https://stackexchange
 ### "Graduates" Websites and Websites on Trial (Beta)
 
 
-```{r group-by-site-state, echo=FALSE}
+```{r group-by-site-state, echo=FALSE, eval=FALSE}
 my_packages <- c("tidyverse", "knitr", "kableExtra", "anytime")
 temp <- lapply(my_packages, library, character.only = TRUE)
 
-info_tbl <- readRDS("data-processed/sites.rds")
+sites <- readRDS("data-processed/sites.rds")
+sites <- rowid_to_column(sites, var = "#")
 
-sites_state <- info_tbl[-c(1, 3:25, 27:33)]
+sites_state <- info_tbl[-c(2, 4:26, 28:34)]
 sites_state <- sites_state[, c(2,1)]
 
 sites_state <- sites_state %>% as_tibble() %>% mutate(
@@ -81,50 +82,78 @@ knitr::kable(sites,
 
 
 
+
 ```{r display-site-infos, echo=FALSE}
 my_packages <- c("tidyverse", "knitr", "kableExtra", "anytime")
 temp <- lapply(my_packages, library, character.only = TRUE)
 
-info_tbl <- readRDS("data-processed/sites.rds")
+sites <- readRDS("data-processed/sites.rds")
 
-sites <- info_tbl[-c(1, 3:22, 24:25, 27:33)]
-sites <- sites[order(sites$total_users, decreasing = TRUE), ]
-sites <- rownames_to_column(sites, var = "#")
-sites$`#` <- as.numeric(sites$`#`)
+sites <- sites[order(sites$total_users, decreasing = TRUE), ] # sort by number of users
+sites <- rowid_to_column(sites, var = "site_rank") # set  1…n to column variable
+sites <- sites[order(sites$site_name), ]   # sort by name and remember rank by user
 
-# add marker if website is still Beta
-sites <- sites %>% as_tibble() %>% mutate(
-    site_state_date = if_else(
-        is.na(info_tbl$site_launch_date), # check if NA
-        paste(as.character(anydate(info_tbl$site_open_beta_date)), "B"), # replace with beta date
-        as.character(anydate(info_tbl$site_launch_date)) # not NA then normal launch date
-    )
+# sites <- sites[, c("site_site_state",
+#                  "total_users",
+#                  "site_api_site_parameter"
+#                  )]
+
+sites2 <- sites %>% select(
+    site_rank,
+    site_name,
+    total_votes
 )
 
-sites <- sites[, c("#", 
-                   "site_name", 
-                   "total_users", 
-                   "site_state_date",
-                   "site_site_url")]
-
-sites <- sites[order(sites$site_name), ]
+# sites2 <- sites[, c(
+#     site_rank, 
+#     total_users,
+#     total_votes)]
 
 
 
-knitr::kable(sites, 
-        booktabs = T, 
-        longtable = T,
-        row.names = F,
-        col.names = c("#*", "Name", "Users", "Launched†", "URL"),
-        caption = "Full List of Websites of the StockExchange Network (May 25th, 2018") %>%
-        kable_styling(latex_options = 
-                c("striped", "repeat_header", full_width = T))  %>%
-        column_spec(1, width = "0.5cm")  %>%
-        column_spec(2, width = "3.5cm")  %>%
-        footnote(symbol = c(
-            "# = rank acoording to number of users",
-            "B = launch date of open beta, e.g. site is still in beta")
-            )
+# names(sites[2]) <- paste0(names(sites[2]),
+#                           footnote_marker_alphabet(1, "latex"))
+# names(sites[7]) <- paste0(names(sites[7]),
+#                           footnote_marker_alphabet(2, "latex"))
+
+# sites1 <- as_tibble(data.frame(
+#     sites$site_rank,
+#     Value   = sites$total_users,
+#     Third_3 = sites$total_votes
+# ))
+
+
+
+sites2 %>% 
+    kable(
+      # booktabs = T,
+      # longtable = T,
+      # row.names = T,
+      # caption = "StockExchange Network (May 25th, 2018)",
+      escape = F,
+      col.names = linebreak(c("Status", "Users", "Rank\n(Users)")))
+
+
+# knitr::kable(sites,
+#         booktabs = T,
+#         longtable = T,
+#         row.names = F,
+        # escape = F,
+        # col.names = c("Nr.",
+        #               "Rank",
+        #               "Name",
+        #               "Users",
+        #               "Audience",
+        #               "URL"),
+        # caption = "StockExchange Network (May 25th, 2018)") %>%
+        # kable_styling(latex_options =
+        #         c("striped", "repeat_header", full_width = T)) %>%
+        # column_spec(1, width = "2.5cm")  %>%
+        # column_spec(2, width = "3.5cm")  %>%
+        # footnote(alphabet = c(
+        #     "rank acoording to number of users",
+        #     "B = launch date of open beta, N = launch of normal status")
+        # )
 
 
 ```

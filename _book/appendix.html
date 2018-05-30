@@ -25,7 +25,7 @@
 <meta name="author" content="Peter Baumgartner">
 
 
-<meta name="date" content="2018-05-27">
+<meta name="date" content="2018-05-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,7 +47,6 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -106,11 +105,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
 <li class="chapter" data-level="2" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html"><i class="fa fa-check"></i><b>2</b> Badges in Stack Overflow</a><ul>
-<li class="chapter" data-level="2.1" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#the-stack-exchange-network"><i class="fa fa-check"></i><b>2.1</b> The Stack Exchange network</a></li>
-<li class="chapter" data-level="2.2" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#categorization-of-badges"><i class="fa fa-check"></i><b>2.2</b> Categorization of Badges</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#badges-for-different-activities"><i class="fa fa-check"></i><b>2.2.1</b> Badges for different activities</a></li>
-<li class="chapter" data-level="2.2.2" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#badges-from-different-sources"><i class="fa fa-check"></i><b>2.2.2</b> Badges from different sources</a></li>
-<li class="chapter" data-level="2.2.3" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#badges-with-different-degrees-of-difficulty"><i class="fa fa-check"></i><b>2.2.3</b> Badges with different degrees of difficulty</a></li>
+<li class="chapter" data-level="2.0.1" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#some-initialization-for-stack-overflow"><i class="fa fa-check"></i><b>2.0.1</b> some initialization for Stack Overflow</a></li>
+<li class="chapter" data-level="2.1" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#the-stack-exchange-network"><i class="fa fa-check"></i><b>2.1</b> The Stack Exchange Network</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#websites-with-stack-overflow-as-showpiece"><i class="fa fa-check"></i><b>2.1.1</b> 172 Websites with Stack Overflow as Showpiece</a></li>
+<li class="chapter" data-level="2.1.2" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#graduates-websites-and-websites-on-trial-beta"><i class="fa fa-check"></i><b>2.1.2</b> “Graduates” Websites and Websites on Trial (Beta)</a></li>
+<li class="chapter" data-level="2.1.3" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#stack-exchange-websites-by-subject"><i class="fa fa-check"></i><b>2.1.3</b> Stack Exchange Websites by Subject</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#dynamics-of-the-stack-exchange-community"><i class="fa fa-check"></i><b>2.2</b> Dynamics of the Stack Exchange Community</a></li>
+<li class="chapter" data-level="2.3" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#categorization-of-badges"><i class="fa fa-check"></i><b>2.3</b> Categorization of Badges</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#badges-for-different-activities"><i class="fa fa-check"></i><b>2.3.1</b> Badges for different activities</a></li>
+<li class="chapter" data-level="2.3.2" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#badges-from-different-sources"><i class="fa fa-check"></i><b>2.3.2</b> Badges from different sources</a></li>
+<li class="chapter" data-level="2.3.3" data-path="badges-in-stack-overflow.html"><a href="badges-in-stack-overflow.html#badges-with-different-degrees-of-difficulty"><i class="fa fa-check"></i><b>2.3.3</b> Badges with different degrees of difficulty</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>3</b> Introduction</a></li>
@@ -164,9 +169,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">7.1.1</span> Prerequisites</h3>
 <p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
 <p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)
-<span class="op">&gt;</span><span class="st"> </span><span class="co"># or the development version</span>
-<span class="er">&gt;</span><span class="st"> </span><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)
+<span class="co"># or the development version</span>
+<span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></code></pre></div>
 <p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
 <p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>.</p>
 </div>
@@ -174,8 +179,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">7.1.2</span> Intro of the minimal book example</h3>
 <p>You can label chapter and section titles using <code>{#label}</code> after them, e.g., we can reference Chapter <a href="intro.html#intro">3</a>. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter <a href="methods.html#methods">4</a>.</p>
 <p>Figures and tables with captions will be placed in <code>figure</code> and <code>table</code> environments, respectively.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))
-<span class="op">&gt;</span><span class="st"> </span><span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))
+<span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:nice-fig"></span>
 <img src="badges4edu_files/figure-html/nice-fig-1.png" alt="Here is a nice figure!" width="80%" />
 <p class="caption">
@@ -183,373 +188,161 @@ Figure 7.1: Here is a nice figure!
 </p>
 </div>
 <p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <a href="appendix.html#fig:nice-fig">7.1</a>. Similarly, you can reference tables generated from <code>knitr::kable()</code>, e.g., see Table <a href="appendix.html#tab:nice-tab">7.1</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>(
-<span class="op">+</span><span class="st">   </span><span class="kw">head</span>(iris, <span class="dv">20</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,
-<span class="op">+</span><span class="st">   </span><span class="dt">booktabs =</span> <span class="ot">TRUE</span>
-<span class="op">+</span><span class="st"> </span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(
+  <span class="kw">head</span>(iris, <span class="dv">20</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,
+  <span class="dt">booktabs =</span> <span class="ot">TRUE</span>
+)</code></pre></div>
 <table>
-<caption>
-<span id="tab:nice-tab">Table 7.1: </span>Here is a nice table!
-</caption>
+<caption><span id="tab:nice-tab">Table 7.1: </span>Here is a nice table!</caption>
 <thead>
-<tr>
-<th style="text-align:right;">
-Sepal.Length
-</th>
-<th style="text-align:right;">
-Sepal.Width
-</th>
-<th style="text-align:right;">
-Petal.Length
-</th>
-<th style="text-align:right;">
-Petal.Width
-</th>
-<th style="text-align:left;">
-Species
-</th>
+<tr class="header">
+<th align="right">Sepal.Length</th>
+<th align="right">Sepal.Width</th>
+<th align="right">Petal.Length</th>
+<th align="right">Petal.Width</th>
+<th align="left">Species</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:right;">
-5.1
-</td>
-<td style="text-align:right;">
-3.5
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="odd">
+<td align="right">5.1</td>
+<td align="right">3.5</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4.9
-</td>
-<td style="text-align:right;">
-3.0
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="even">
+<td align="right">4.9</td>
+<td align="right">3.0</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4.7
-</td>
-<td style="text-align:right;">
-3.2
-</td>
-<td style="text-align:right;">
-1.3
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="odd">
+<td align="right">4.7</td>
+<td align="right">3.2</td>
+<td align="right">1.3</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4.6
-</td>
-<td style="text-align:right;">
-3.1
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="even">
+<td align="right">4.6</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5.0
-</td>
-<td style="text-align:right;">
-3.6
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="odd">
+<td align="right">5.0</td>
+<td align="right">3.6</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5.4
-</td>
-<td style="text-align:right;">
-3.9
-</td>
-<td style="text-align:right;">
-1.7
-</td>
-<td style="text-align:right;">
-0.4
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="even">
+<td align="right">5.4</td>
+<td align="right">3.9</td>
+<td align="right">1.7</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4.6
-</td>
-<td style="text-align:right;">
-3.4
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.3
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="odd">
+<td align="right">4.6</td>
+<td align="right">3.4</td>
+<td align="right">1.4</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5.0
-</td>
-<td style="text-align:right;">
-3.4
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="even">
+<td align="right">5.0</td>
+<td align="right">3.4</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4.4
-</td>
-<td style="text-align:right;">
-2.9
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="odd">
+<td align="right">4.4</td>
+<td align="right">2.9</td>
+<td align="right">1.4</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4.9
-</td>
-<td style="text-align:right;">
-3.1
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.1
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="even">
+<td align="right">4.9</td>
+<td align="right">3.1</td>
+<td align="right">1.5</td>
+<td align="right">0.1</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5.4
-</td>
-<td style="text-align:right;">
-3.7
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="odd">
+<td align="right">5.4</td>
+<td align="right">3.7</td>
+<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4.8
-</td>
-<td style="text-align:right;">
-3.4
-</td>
-<td style="text-align:right;">
-1.6
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="even">
+<td align="right">4.8</td>
+<td align="right">3.4</td>
+<td align="right">1.6</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4.8
-</td>
-<td style="text-align:right;">
-3.0
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.1
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="odd">
+<td align="right">4.8</td>
+<td align="right">3.0</td>
+<td align="right">1.4</td>
+<td align="right">0.1</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4.3
-</td>
-<td style="text-align:right;">
-3.0
-</td>
-<td style="text-align:right;">
-1.1
-</td>
-<td style="text-align:right;">
-0.1
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="even">
+<td align="right">4.3</td>
+<td align="right">3.0</td>
+<td align="right">1.1</td>
+<td align="right">0.1</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5.8
-</td>
-<td style="text-align:right;">
-4.0
-</td>
-<td style="text-align:right;">
-1.2
-</td>
-<td style="text-align:right;">
-0.2
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="odd">
+<td align="right">5.8</td>
+<td align="right">4.0</td>
+<td align="right">1.2</td>
+<td align="right">0.2</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5.7
-</td>
-<td style="text-align:right;">
-4.4
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.4
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="even">
+<td align="right">5.7</td>
+<td align="right">4.4</td>
+<td align="right">1.5</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5.4
-</td>
-<td style="text-align:right;">
-3.9
-</td>
-<td style="text-align:right;">
-1.3
-</td>
-<td style="text-align:right;">
-0.4
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="odd">
+<td align="right">5.4</td>
+<td align="right">3.9</td>
+<td align="right">1.3</td>
+<td align="right">0.4</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5.1
-</td>
-<td style="text-align:right;">
-3.5
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.3
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="even">
+<td align="right">5.1</td>
+<td align="right">3.5</td>
+<td align="right">1.4</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5.7
-</td>
-<td style="text-align:right;">
-3.8
-</td>
-<td style="text-align:right;">
-1.7
-</td>
-<td style="text-align:right;">
-0.3
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="odd">
+<td align="right">5.7</td>
+<td align="right">3.8</td>
+<td align="right">1.7</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5.1
-</td>
-<td style="text-align:right;">
-3.8
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.3
-</td>
-<td style="text-align:left;">
-setosa
-</td>
+<tr class="even">
+<td align="right">5.1</td>
+<td align="right">3.8</td>
+<td align="right">1.5</td>
+<td align="right">0.3</td>
+<td align="left">setosa</td>
 </tr>
 </tbody>
 </table>
@@ -561,8 +354,8 @@ setosa
 <div id="install-stackr-with-vignettes" class="section level3">
 <h3><span class="header-section-number">7.2.1</span> Install stackr with vignettes</h3>
 <p>Building vignettes takes some time. So if you are in a hurry, than just install stackr. You can still look at the vignettes in R help. The difference is: With <code>build_vignettes = TRUE</code> and then <code>browseVignettes(&quot;stackr&quot;)</code> you can look at the vignettes in your default browser. This is slightly more comfortable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;dgrtwo/stackr&quot;</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)
-<span class="op">&gt;</span><span class="st"> </span><span class="kw">browseVignettes</span>(<span class="st">&quot;stackr&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;dgrtwo/stackr&quot;</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)
+<span class="kw">browseVignettes</span>(<span class="st">&quot;stackr&quot;</span>)</code></pre></div>
 </div>
 </div>
 <div id="load-several-packages-at-once" class="section level2">
@@ -578,15 +371,15 @@ setosa
 <p>“This can be slow when thousands of packages are installed, so do not use this to find out if a named package is installed (use system.file or find.package) nor to find out if a package is usable (call require and check the return value) …”</p>
 </blockquote>
 <p>So maybe the best would be to combine the <code>lapply</code> with the <code>installled.packages</code> version. But insted to use <code>installled.packages</code> I should use in the if-statement <code>require</code>, check for the return value and – if necessary – to install missing packages.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;plyr&quot;</span>, <span class="st">&quot;psych&quot;</span>, <span class="st">&quot;tm&quot;</span>)
-<span class="op">&gt;</span><span class="st"> </span><span class="kw">lapply</span>(x, library, <span class="dt">character.only =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;plyr&quot;</span>, <span class="st">&quot;psych&quot;</span>, <span class="st">&quot;tm&quot;</span>)
+<span class="kw">lapply</span>(x, library, <span class="dt">character.only =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <div id="how-many-downloads-of-a-defined-packages" class="section level3">
 <h3><span class="header-section-number">7.3.1</span> How many downloads of a defined packages?</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(dlstats)
-<span class="op">&gt;</span><span class="st"> </span>y &lt;-<span class="st"> </span><span class="kw">cran_stats</span>(<span class="st">&quot;learnr&quot;</span>)
-<span class="op">&gt;</span><span class="st"> </span><span class="kw">ggplot</span>(y, <span class="kw">aes</span>(start, downloads, <span class="dt">group =</span> package, <span class="dt">color =</span> package)) <span class="op">+</span>
-<span class="op">+</span><span class="st">         </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">shape =</span> package))
-<span class="op">&gt;</span><span class="st"> </span><span class="co"># cranApp()</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dlstats)
+y &lt;-<span class="st"> </span><span class="kw">cran_stats</span>(<span class="st">&quot;learnr&quot;</span>)
+<span class="kw">ggplot</span>(y, <span class="kw">aes</span>(start, downloads, <span class="dt">group =</span> package, <span class="dt">color =</span> package)) <span class="op">+</span>
+<span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">shape =</span> package))
+<span class="co"># cranApp()</span></code></pre></div>
 </div>
 </div>
 <div id="some-data-to-remind" class="section level2">
@@ -601,28 +394,136 @@ setosa
 <p>I have added <code>timeline</code> to the list!</p>
 <div id="some-experiments" class="section level3">
 <h3><span class="header-section-number">7.4.1</span> Some experiments</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(tidyverse)
-<span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(lubridate)
-<span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(jsonlite)
-<span class="op">&gt;</span><span class="st"> </span>
-<span class="er">&gt;</span><span class="st"> </span><span class="co"># returns: &quot;Error in open.connection(con, &quot;rb&quot;) : HTTP error 400.&quot;</span>
-<span class="er">&gt;</span><span class="st"> </span>
-<span class="er">&gt;</span><span class="st"> </span>json_file1 &lt;-<span class="st"> &quot;https://api.stackexchange.com/2.2/events?site=stackoverflow&amp;key=mRTYimh499J3lInIGjcxfA((&quot;</span>
-<span class="op">&gt;</span><span class="st"> </span>json_list1 &lt;-<span class="st"> </span>jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(json_file1, <span class="dt">flatten =</span> <span class="ot">TRUE</span>)
-<span class="op">&gt;</span><span class="st"> </span>df1 &lt;-<span class="st"> </span><span class="kw">as.tibble</span>(json_list1[[<span class="dv">1</span>]])
-<span class="op">&gt;</span><span class="st"> </span>df1 &lt;-<span class="st"> </span>df1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">created =</span> <span class="kw">with_tz</span>(<span class="kw">as.POSIXct</span>(creation_date, <span class="dt">origin =</span> <span class="st">&quot;1970-01-01&quot;</span>), <span class="st">&quot;UTC&quot;</span>))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(dplyr)
-<span class="op">&gt;</span><span class="st"> </span>mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span>
-<span class="op">+</span><span class="st">     </span><span class="kw">mutate</span>(
-<span class="op">+</span><span class="st">         </span><span class="dt">car =</span> <span class="kw">row.names</span>(.),
-<span class="op">+</span><span class="st">         </span><span class="co"># You don&#39;t need format = &quot;latex&quot; if you have ever defined options(knitr.table.format)</span>
-<span class="op">+</span><span class="st">         </span><span class="dt">mpg =</span> <span class="kw">cell_spec</span>(mpg, <span class="st">&quot;latex&quot;</span>, <span class="dt">color =</span> <span class="kw">ifelse</span>(mpg <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>)),
-<span class="op">+</span><span class="st">         </span><span class="dt">cyl =</span> <span class="kw">cell_spec</span>(cyl, <span class="st">&quot;latex&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">align =</span> <span class="st">&quot;c&quot;</span>, <span class="dt">angle =</span> <span class="dv">45</span>,
-<span class="op">+</span><span class="st">             </span><span class="dt">background =</span> <span class="kw">factor</span>(cyl, <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>), <span class="kw">c</span>(<span class="st">&quot;#666666&quot;</span>, <span class="st">&quot;#999999&quot;</span>, <span class="st">&quot;#BBBBBB&quot;</span>)))
-<span class="op">+</span><span class="st"> </span>) <span class="op">%&gt;%</span>
-<span class="op">+</span><span class="st"> </span><span class="kw">select</span>(car, mpg, cyl) <span class="op">%&gt;%</span>
-<span class="op">+</span><span class="st"> </span><span class="kw">kable</span>(<span class="st">&quot;latex&quot;</span>, <span class="dt">escape =</span> F, <span class="dt">booktabs =</span> T, <span class="dt">linesep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(lubridate)
+<span class="kw">library</span>(jsonlite)
 
+<span class="co"># returns: &quot;Error in open.connection(con, &quot;rb&quot;) : HTTP error 400.&quot;</span>
+
+json_file1 &lt;-<span class="st"> &quot;https://api.stackexchange.com/2.2/events?site=stackoverflow&amp;key=mRTYimh499J3lInIGjcxfA((&quot;</span>
+json_list1 &lt;-<span class="st"> </span>jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(json_file1, <span class="dt">flatten =</span> <span class="ot">TRUE</span>)
+df1 &lt;-<span class="st"> </span><span class="kw">as.tibble</span>(json_list1[[<span class="dv">1</span>]])
+df1 &lt;-<span class="st"> </span>df1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">created =</span> <span class="kw">with_tz</span>(<span class="kw">as.POSIXct</span>(creation_date, <span class="dt">origin =</span> <span class="st">&quot;1970-01-01&quot;</span>), <span class="st">&quot;UTC&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(
+        <span class="dt">car =</span> <span class="kw">row.names</span>(.),
+        <span class="co"># You don&#39;t need format = &quot;latex&quot; if you have ever defined options(knitr.table.format)</span>
+        <span class="dt">mpg =</span> <span class="kw">cell_spec</span>(mpg, <span class="st">&quot;latex&quot;</span>, <span class="dt">color =</span> <span class="kw">ifelse</span>(mpg <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>)),
+        <span class="dt">cyl =</span> <span class="kw">cell_spec</span>(cyl, <span class="st">&quot;latex&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">align =</span> <span class="st">&quot;c&quot;</span>, <span class="dt">angle =</span> <span class="dv">45</span>,
+            <span class="dt">background =</span> <span class="kw">factor</span>(cyl, <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>), <span class="kw">c</span>(<span class="st">&quot;#666666&quot;</span>, <span class="st">&quot;#999999&quot;</span>, <span class="st">&quot;#BBBBBB&quot;</span>)))
+) <span class="op">%&gt;%</span>
+<span class="kw">select</span>(car, mpg, cyl) <span class="op">%&gt;%</span>
+<span class="kw">kable</span>(<span class="st">&quot;latex&quot;</span>, <span class="dt">escape =</span> F, <span class="dt">booktabs =</span> T, <span class="dt">linesep =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
+<span class="kw">library</span>(kableExtra)
+<span class="kw">library</span>(tidyverse)
+dt_lb &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">data.frame</span>(
+    <span class="dt">Item =</span> <span class="kw">c</span>(<span class="st">&quot;Hello</span><span class="ch">\n</span><span class="st">World&quot;</span>, <span class="st">&quot;This</span><span class="ch">\n</span><span class="st">is a cat&quot;</span>),
+    <span class="dt">Value =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">100</span>),
+    <span class="dt">Third =</span> <span class="kw">c</span>(<span class="st">&quot;xx</span><span class="ch">\n</span><span class="st">xx&quot;</span>, <span class="st">&quot;yyyy&quot;</span>) <span class="co"># does not work without linebreak!!!</span>
+))
+
+
+
+dt_lb <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate_all</span>(linebreak) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># to keep the hard linebreaks in the text items</span>
+<span class="st">    </span><span class="kw">kable</span>(<span class="dt">booktabs =</span> T, <span class="dt">escape =</span> F,
+    <span class="dt">col.names =</span> <span class="kw">linebreak</span>(<span class="kw">c</span>(<span class="st">&quot;xxxy</span><span class="ch">\n</span><span class="st">(Name)&quot;</span>, <span class="st">&quot;zzzy</span><span class="ch">\n</span><span class="st">(Number)&quot;</span>, <span class="st">&quot;Another</span><span class="ch">\n</span><span class="st">(Name)&quot;</span>)))</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+
+</th>
+<th style="text-align:right;">
+
+</th>
+<th style="text-align:left;">
+
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
+<span class="kw">library</span>(kableExtra)
+<span class="kw">library</span>(tidyverse)
+dt_lb &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">data.frame</span>(
+    <span class="dt">Item =</span> <span class="kw">c</span>(<span class="st">&quot;Hello World&quot;</span>, <span class="st">&quot;This is a cat&quot;</span>),
+    <span class="dt">Value =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">100</span>),
+    <span class="dt">Third =</span> <span class="kw">c</span>(<span class="st">&quot;xxxx&quot;</span>, <span class="st">&quot;yyyy&quot;</span>)
+))
+
+
+
+dt_lb <span class="op">%&gt;%</span>
+<span class="co">#    mutate_all(linebreak) %&gt;% # to keep the hard linebreaks in the text items</span>
+<span class="st">    </span><span class="kw">kable</span>(<span class="dt">booktabs =</span> T, <span class="dt">escape =</span> F,
+    <span class="dt">col.names =</span> <span class="kw">linebreak</span>(<span class="kw">c</span>(<span class="st">&quot;Column 1&quot;</span>, <span class="st">&quot;Column 2&quot;</span>, <span class="st">&quot;Column 3&quot;</span>)))</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Column 1
+</th>
+<th style="text-align:right;">
+Column 2
+</th>
+<th style="text-align:left;">
+Column 3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Hello World
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:left;">
+xxxx
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+This is a cat
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:left;">
+yyyy
+</td>
+</tr>
+</tbody>
+</table>
 
 <div id="refs" class="references">
 <div>
@@ -635,12 +536,6 @@ setosa
 </div>
 </div>
 </div>
-
-
-
-
-
-
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-R-bookdown">
