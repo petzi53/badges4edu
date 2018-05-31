@@ -4,7 +4,6 @@ output:
   html_document: default
 ---
 
-
 # Badges in Stack Overflow
 
 ```{r label = "global-options", echo=FALSE, message=FALSE, highlight=TRUE}
@@ -50,14 +49,14 @@ temp <- lapply(my_packages, library, character.only = TRUE)
 sites <- readRDS("data-processed/sites.rds")
 sites <- rowid_to_column(sites, var = "#")
 
-sites_state <- info_tbl[-c(2, 4:26, 28:34)]
+sites_state <- sites[-c(2, 4:26, 28:34)]
 sites_state <- sites_state[, c(2,1)]
 
 sites_state <- sites_state %>% as_tibble() %>% mutate(
     site_state = if_else(
-        is.na(info_tbl$site_launch_date), # check if NA
-        info_tbl$site_state <- "Beta", # mark as beta
-        info_tbl$site_state <- "Normal"
+        is.na(sites$site_launch_date), # check if NA
+        sites$site_state <- "Beta", # mark as beta
+        sites$site_state <- "Normal"
     )
 )
 
@@ -83,77 +82,56 @@ knitr::kable(sites,
 
 
 
-```{r display-site-infos, echo=FALSE}
-my_packages <- c("tidyverse", "knitr", "kableExtra", "anytime")
+```{r display-site-infos, echo=FALSE, eval=FALSE}
+my_packages <- c("tidyverse", "knitr", "kableExtra", "pander")
 temp <- lapply(my_packages, library, character.only = TRUE)
 
-sites <- readRDS("data-processed/sites.rds")
+df_tbl <- readRDS("data-processed/sites.rds")
+df_tbl <- df_tbl[order(df_tbl$total_users, decreasing = TRUE), ] # sort by number of users
+df_tbl <- rowid_to_column(df_tbl, var = "site_rank") # set  1…n to column variable
+df_tbl <- df_tbl[order(df_tbl$site_name), ]   # sort by name and remember rank by user
 
-sites <- sites[order(sites$total_users, decreasing = TRUE), ] # sort by number of users
-sites <- rowid_to_column(sites, var = "site_rank") # set  1…n to column variable
-sites <- sites[order(sites$site_name), ]   # sort by name and remember rank by user
-
-# sites <- sites[, c("site_site_state",
-#                  "total_users",
-#                  "site_api_site_parameter"
-#                  )]
-
-sites2 <- sites %>% select(
-    site_rank,
+sites <- df_tbl %>% select(
     site_name,
-    total_votes
+    total_users,
+    site_rank,
+    site_audience
 )
 
-# sites2 <- sites[, c(
-#     site_rank, 
-#     total_users,
-#     total_votes)]
+if (knitr::is_html_output()) {
+    sites <- sites %>% mutate(
+        site_name = paste0("[", sites$site_name, "](", df_tbl$site_site_url, ")"))
+    knitr::kable(sites,
+        format = "markdown",
+        booktabs = T,
+        longtable = T,
+        row.names = T,
+        col.names = c("Name",
+              "Users",
+              "Rank",
+              "Audience"),
+        caption = "StockExchange Network (May 25th, 2018)",
+        format.args = list(big.mark = "'")
+    )
+}
 
-
-
-# names(sites[2]) <- paste0(names(sites[2]),
-#                           footnote_marker_alphabet(1, "latex"))
-# names(sites[7]) <- paste0(names(sites[7]),
-#                           footnote_marker_alphabet(2, "latex"))
-
-# sites1 <- as_tibble(data.frame(
-#     sites$site_rank,
-#     Value   = sites$total_users,
-#     Third_3 = sites$total_votes
-# ))
-
-
-
-sites2 %>% 
-    kable(
-      # booktabs = T,
-      # longtable = T,
-      # row.names = T,
-      # caption = "StockExchange Network (May 25th, 2018)",
-      escape = F,
-      col.names = linebreak(c("Status", "Users", "Rank\n(Users)")))
-
-
-# knitr::kable(sites,
-#         booktabs = T,
-#         longtable = T,
-#         row.names = F,
-        # escape = F,
-        # col.names = c("Nr.",
-        #               "Rank",
-        #               "Name",
-        #               "Users",
-        #               "Audience",
-        #               "URL"),
-        # caption = "StockExchange Network (May 25th, 2018)") %>%
-        # kable_styling(latex_options =
-        #         c("striped", "repeat_header", full_width = T)) %>%
-        # column_spec(1, width = "2.5cm")  %>%
-        # column_spec(2, width = "3.5cm")  %>%
-        # footnote(alphabet = c(
-        #     "rank acoording to number of users",
-        #     "B = launch date of open beta, N = launch of normal status")
-        # )
+if (knitr::is_latex_output()) {
+    knitr::kable(sites,
+        format = "latex",
+        booktabs = T,
+        longtable = T,
+        row.names = T,
+        col.names = c("Name",
+              "Users",
+              "Rank",
+              "Audience"),
+        caption = "StockExchange Network (May 25th, 2018)",
+        format.args = list(big.mark = "'") %>%
+        column_spec(1, width = "1cm")  %>%
+        column_spec(2, width = "3cm")  %>%
+        column_spec(3, width = "2cm")
+    )
+}
 
 
 ```
@@ -298,6 +276,69 @@ kable(badges_table,
         column_spec(3, width = "2cm") %>%
         column_spec(9, width = "9cm") %>%
         landscape()
+```
+
+## Websites of the Stack Exchange Networks
+
+```{r display-sites-info, echo=FALSE}
+my_packages <- c("tidyverse", "knitr", "kableExtra")
+temp <- lapply(my_packages, library, character.only = TRUE, warn.conflicts = FALSE)
+
+sites <- readRDS("data-processed/sites.rds")
+
+sites <- sites[order(sites$total_users, decreasing = TRUE), ] # sort by number of users
+sites <- rowid_to_column(sites, var = "site_rank") # set  1…n to column variable
+sites <- sites[order(sites$site_name), ]   # sort by name and remember rank by user
+
+if (!knitr::is_latex_output()) {
+sites <- sites %>% mutate(site_name = 
+              paste0("[", sites$site_name, "](", sites$site_site_url, ")"))
+}
+
+if (knitr::is_latex_output()) {
+sites <- sites %>% mutate(site_name = 
+              paste0("\\href{", sites$site_site_url, "}{", sites$site_name, "}"))
+}    
+sites <- sites %>% select(
+    site_name,
+    total_users,
+    site_rank,
+    site_audience
+)
+
+
+if (!knitr::is_latex_output()) {        
+    kable(sites, 
+            booktabs = T, 
+            longtable = T,
+            row.names = T,
+            col.names = c("Name", "User", "Rank", "Audience"),
+            caption = "StockExchange Network (May 25th, 2018)",
+            format.args = list(big.mark = "'")) %>%
+            kable_styling(latex_options = 
+                    c("striped", "repeat_header", full_width = T)) 
+}
+
+if (knitr::is_latex_output()) {  
+    kable(sites, 
+            format = "latex",
+            escape = FALSE,
+            booktabs = T, 
+            longtable = T,
+            row.names = T,
+            col.names = c("Name", "User", "Rank", "Audience"),
+            caption = "Websites of the Stack Exchange Network",
+            format.args = list(big.mark = "'")) %>%
+            kable_styling(latex_options = 
+                     c("striped", "repeat_header", full_width = T)) %>%
+            column_spec(1, width = "0.4cm")  %>%
+            column_spec(2, width = "4cm")  %>%
+            column_spec(3, width = "1.2cm") %>%
+            column_spec(4, width = "0.4cm") %>%
+            column_spec(5, width = "8cm")
+            
+}
+
 ```
 
 

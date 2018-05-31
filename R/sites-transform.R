@@ -17,12 +17,23 @@ sites <- readRDS("data-raw/sites-raw.rds")
 sites[122, 26] <- "Stack Overflow in Portuguese"
 sites[55, 26] <- "Stack Overflow in Spanish"
 sites[131, 26] <- "Stack Overflow in Russian"
+sites[131, 22] <- "for programmers in Russian language"
 sites[132, 26] <- "Russian Language in Russian"
+sites[132, 22] <- "learners of the Russian language"
 sites[82, 26] <- "Stack Overflow in Japanese"
+sites[82, 22] <- "for programmers in Japanese language"
+sites[59, 22] <- "self-employed and freelance workers"
 
 # https://stackoverflow.com/questions/11936339/replace-specific-characters-within-strings
 sites$site_name <- gsub("&amp;",  "and", sites$site_name, fixed = TRUE)
+sites$site_audience <- gsub("&amp;",  "and", sites$site_audience, fixed = TRUE)
 sites$site_name <- gsub("&#174;", "", sites$site_name, fixed = TRUE)
+sites$site_audience <- gsub("&#174;", "", sites$site_audience, fixed = TRUE)
+sites$site_audience <- gsub("&#225;", "á", sites$site_audience, fixed = TRUE)
+sites$site_audience <- gsub("&quot;", "'", sites$site_audience, fixed = TRUE)
+sites$site_audience <- gsub("&#39;", "'", sites$site_audience, fixed = TRUE)
+
+sites$site_audience
 
 # sort by site_name in order to compare with website for adding site_category
 sites <- sites[order(sites$site_name),]
@@ -81,6 +92,9 @@ sites <- sites %>% mutate(
 sites$site_active_days <-
     round(as.numeric(difftime(as.POSIXct(Sys.time(), "UCT"),
                               sites$site_state_date, units = "days")))
+
+
+
 
 saveRDS(as_tibble(sites), file = "data-processed/sites.rds")
 

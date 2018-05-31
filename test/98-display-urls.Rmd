@@ -1,0 +1,20 @@
+
+---
+output: pdf_document
+---
+# Test
+
+
+
+```{r}
+library(pander)
+# some urls
+urls <- rep("https://stackoverflow.com/", 10)
+# use paste0 to compose markdown-formatted hyperlinks
+mtcars$mpg <- paste0("[", mtcars$mpg, "](", urls, ")")
+# print the table, with hyperlinked text
+knitr::kable(head(mtcars))
+
+t <- pandoc.link.return('http://r-project.org', 'R')
+t
+```
